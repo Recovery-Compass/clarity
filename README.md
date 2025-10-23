@@ -59,6 +59,39 @@ The most important feature in CLARITY is simple:
 
 This single indicator has changed lives.
 
+### ⚡ Intelligent Automations - Burnout Protection System
+
+CLARITY actively protects you from burnout with 6 powerful automations:
+
+**1. Daily "Real Deadline Check" Email (7 AM PT)**
+- Scans all projects and emails ONLY hard deadlines with dates + consequences + sources
+- If none exist: "No hard deadlines today. You can breathe."
+- **Why:** You wake up knowing exactly what's actually urgent vs. what can wait
+
+**2. Weekly "Permission to Rest" Report (Sunday 6 PM PT)**
+- Reviews all projects, checks for hard deadlines in next 7 days
+- If none exist: "No hard deadlines this week. Here's what you accomplished. You have permission to rest."
+- **Why:** Breaks the cycle of feeling behind when you're actually ahead
+
+**3. "You're Working Too Much" Alert (Triggered)**
+- If you log activity for 6+ consecutive days: "You've worked 6 days straight. What's one thing you can pause until [date]?"
+- **Why:** Prevents burnout before it happens
+
+**4. Monthly "Deadline Audit" (1st of month, 9 AM PT)**
+- Lists all deadlines you entered last month that had no source/consequence
+- Asks: "Were these real deadlines or AI urgency? Archive them?"
+- **Why:** Trains you to recognize false urgency patterns
+
+**5. Project Update Reminder (Every 3 days, 10 AM PT)**
+- If no activity for 3 days AND hard deadline exists: reminds you
+- If no hard deadline: "No urgent tasks. Check in when you have capacity."
+- **Why:** Balances advocacy with your wellbeing
+
+**6. Achievement Celebration (Triggered)**
+- When you deploy or complete major milestone, waits 24 hours
+- Sends: "You built something yesterday. That matters. What felt good about it?"
+- **Why:** Helps you notice wins instead of immediately moving to next crisis
+
 ### 📊 Project Status at a Glance
 
 Every project shows:
