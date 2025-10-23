@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Calendar, CheckCircle2, Clock, AlertCircle, Sparkles, Heart, Coffee } from 'lucide-react'
+import { Calendar, CheckCircle2, Clock, AlertCircle, Sparkles, Heart, Coffee, Zap } from 'lucide-react'
+import AutomationsPanel from './components/AutomationsPanel'
 import type { ProjectWithDetails, DeadlineType } from './types'
 
 // Mock data for demonstration - replace with actual API calls
@@ -68,6 +69,7 @@ function App() {
   const [projects, setProjects] = useState<ProjectWithDetails[]>(mockProjects)
   const [totalHardDeadlines, setTotalHardDeadlines] = useState(0)
   const [canRest, setCanRest] = useState(true)
+  const [showAutomations, setShowAutomations] = useState(false)
 
   useEffect(() => {
     const hardCount = projects.reduce((sum, p) => sum + p.hardDeadlineCount, 0)
@@ -121,6 +123,31 @@ function App() {
               The world's first deadline system that distinguishes <span className="text-clarity-accent-primary font-semibold">real urgency</span> from <span className="text-clarity-accent-secondary font-semibold">AI-fabricated pressure</span>.
             </p>
 
+            {/* Navigation Tabs */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <button
+                onClick={() => setShowAutomations(false)}
+                className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                  !showAutomations
+                    ? 'bg-clarity-accent-primary text-white'
+                    : 'bg-clarity-gray-800 text-clarity-gray-400 hover:bg-clarity-gray-700'
+                }`}
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => setShowAutomations(true)}
+                className={`px-6 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                  showAutomations
+                    ? 'bg-clarity-accent-primary text-white'
+                    : 'bg-clarity-gray-800 text-clarity-gray-400 hover:bg-clarity-gray-700'
+                }`}
+              >
+                <Zap className="w-4 h-4" />
+                Automations
+              </button>
+            </div>
+
             {/* THE LEGENDARY "YOU CAN REST" INDICATOR */}
             {canRest ? (
               <div className="inline-flex items-center gap-3 card bg-clarity-deadline-none/5 border-clarity-deadline-none/20 px-8 py-6 animate-float">
@@ -144,52 +171,59 @@ function App() {
             )}
           </div>
 
-          {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="card">
-              <div className="flex items-center gap-3 mb-2">
-                <CheckCircle2 className="w-5 h-5 text-clarity-deadline-none" />
-                <h3 className="text-lg">Projects</h3>
+          {/* Stats Overview - Only show on Projects tab */}
+          {!showAutomations && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div className="card">
+                <div className="flex items-center gap-3 mb-2">
+                  <CheckCircle2 className="w-5 h-5 text-clarity-deadline-none" />
+                  <h3 className="text-lg">Projects</h3>
+                </div>
+                <p className="text-3xl font-bold text-white">{projects.length}</p>
+                <p className="text-sm text-clarity-gray-400 mt-1">Active across life domains</p>
               </div>
-              <p className="text-3xl font-bold text-white">{projects.length}</p>
-              <p className="text-sm text-clarity-gray-400 mt-1">Active across life domains</p>
-            </div>
 
-            <div className="card">
-              <div className="flex items-center gap-3 mb-2">
-                <Calendar className="w-5 h-5 text-clarity-accent-primary" />
-                <h3 className="text-lg">Hard Deadlines</h3>
+              <div className="card">
+                <div className="flex items-center gap-3 mb-2">
+                  <Calendar className="w-5 h-5 text-clarity-accent-primary" />
+                  <h3 className="text-lg">Hard Deadlines</h3>
+                </div>
+                <p className="text-3xl font-bold text-white">{totalHardDeadlines}</p>
+                <p className="text-sm text-clarity-gray-400 mt-1">With real consequences</p>
               </div>
-              <p className="text-3xl font-bold text-white">{totalHardDeadlines}</p>
-              <p className="text-sm text-clarity-gray-400 mt-1">With real consequences</p>
-            </div>
 
-            <div className="card">
-              <div className="flex items-center gap-3 mb-2">
-                <Clock className="w-5 h-5 text-clarity-accent-secondary" />
-                <h3 className="text-lg">Completion Rate</h3>
+              <div className="card">
+                <div className="flex items-center gap-3 mb-2">
+                  <Clock className="w-5 h-5 text-clarity-accent-secondary" />
+                  <h3 className="text-lg">Completion Rate</h3>
+                </div>
+                <p className="text-3xl font-bold text-white">
+                  {Math.round((projects.reduce((sum, p) => sum + p.completedTasks, 0) / projects.reduce((sum, p) => sum + p.totalTasks, 0)) * 100)}%
+                </p>
+                <p className="text-sm text-clarity-gray-400 mt-1">Tasks completed</p>
               </div>
-              <p className="text-3xl font-bold text-white">
-                {Math.round((projects.reduce((sum, p) => sum + p.completedTasks, 0) / projects.reduce((sum, p) => sum + p.totalTasks, 0)) * 100)}%
-              </p>
-              <p className="text-sm text-clarity-gray-400 mt-1">Tasks completed</p>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
-      {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold">Your Projects</h2>
-          <button className="btn-primary">
-            + New Project
-          </button>
-        </div>
+      {/* Conditional Content: Projects or Automations */}
+      {showAutomations ? (
+        <AutomationsPanel />
+      ) : (
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">Your Projects</h2>
+            <button className="btn-primary">
+              + New Project
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <div key={project.id} className="card group hover:scale-[1.02] cursor-pointer">
+            {projects.map((project) => (
+              <div key={project.id} className="card group hover:scale-[1.02] cursor-pointer">
               {/* Project Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
@@ -263,10 +297,11 @@ function App() {
                   <p className="text-sm text-clarity-deadline-hard">Next required: {project.nextHardDeadline}</p>
                 </div>
               )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Footer with Love */}
       <footer className="border-t border-clarity-gray-800 mt-20">
