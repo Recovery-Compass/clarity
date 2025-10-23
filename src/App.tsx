@@ -66,7 +66,7 @@ const mockProjects: ProjectWithDetails[] = [
 ]
 
 function App() {
-  const [projects, setProjects] = useState<ProjectWithDetails[]>(mockProjects)
+  const [projects] = useState<ProjectWithDetails[]>(mockProjects)
   const [totalHardDeadlines, setTotalHardDeadlines] = useState(0)
   const [canRest, setCanRest] = useState(true)
   const [showAutomations, setShowAutomations] = useState(false)
@@ -220,8 +220,6 @@ function App() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {projects.map((project) => (
               <div key={project.id} className="card group hover:scale-[1.02] cursor-pointer">
               {/* Project Header */}
