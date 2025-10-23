@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-clarity-gray-700;
+  }
+  
+  body {
+    @apply bg-clarity-dark text-clarity-gray-300 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-semibold;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-clarity-gray-900/50 backdrop-blur-xl border border-clarity-gray-700/50;
+  }
+
+  .card {
+    @apply glass rounded-2xl p-6 transition-all duration-300 hover:border-clarity-accent-primary/30;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-clarity-dark;
+  }
+
+  .btn-primary {
+    @apply btn bg-clarity-accent-primary text-white hover:bg-clarity-accent-primary/90;
+    @apply focus:ring-clarity-accent-primary;
+  }
+
+  .btn-secondary {
+    @apply btn bg-clarity-gray-800 text-clarity-gray-300 hover:bg-clarity-gray-700;
+    @apply focus:ring-clarity-gray-600;
+  }
+
+  .deadline-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .deadline-hard {
+    @apply deadline-badge bg-clarity-deadline-hard/10 text-clarity-deadline-hard border border-clarity-deadline-hard/20;
+  }
+
+  .deadline-soft {
+    @apply deadline-badge bg-clarity-deadline-soft/10 text-clarity-deadline-soft border border-clarity-deadline-soft/20;
+  }
+
+  .deadline-none {
+    @apply deadline-badge bg-clarity-deadline-none/10 text-clarity-deadline-none border border-clarity-deadline-none/20;
+  }
+
+  .status-indicator {
+    @apply w-2 h-2 rounded-full animate-pulse-slow;
+  }
+
+  .status-completed {
+    @apply status-indicator bg-clarity-deadline-none;
+  }
+
+  .status-in-progress {
+    @apply status-indicator bg-clarity-accent-primary;
+  }
+
+  .status-blocked {
+    @apply status-indicator bg-clarity-deadline-hard;
+  }
+
+  .status-optional {
+    @apply status-indicator bg-clarity-gray-500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
